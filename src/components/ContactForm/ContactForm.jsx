@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
-// import { Formik } from 'formik';
 import { Form, Label, Input, Button } from './ContactForm.styled';
 
 const ContactForm = ({ addContact }) => {
@@ -66,7 +65,7 @@ const ContactForm = ({ addContact }) => {
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
         onChange={inputChangeHandler}
-        placeholder="tellephone number"
+        placeholder="tellephone number xxx-xx-xx"
       />
 
       <Button>Add contact</Button>

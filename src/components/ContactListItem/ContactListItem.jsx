@@ -1,24 +1,20 @@
-import {Item, Button} from './ContactListItem.styled';
-import PropTypes from 'prop-types';
+import { Item, Button } from './ContactListItem.styled';
+import { useContacts } from 'components/ContextProvider';
 
-const ContactListItem = ({contacts, onDelete}) => (contacts.map(({id, name, number}) => (
+const ContactListItem = () => {
+  const { contacts, onDelete } = useContacts();
+  return contacts.map(({ id, name, number }) => (
     <Item key={id}>
-        {name}: {number}
-        <Button 
-            onClick={()=>{
-                onDelete(id);
-            }}
-        >
-            Delete
-        </Button>
+      {name}: {number}
+      <Button
+        onClick={() => {
+          onDelete(id);
+        }}
+      >
+        Delete
+      </Button>
     </Item>
-)))
-
-ContactListItem.propTypes = {
-    contacts: PropTypes.array.isRequired,
-    onDelete: PropTypes.func.isRequired
-}
-
+  ));
+};
 
 export default ContactListItem;
-

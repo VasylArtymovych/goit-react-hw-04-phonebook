@@ -4,6 +4,7 @@ import ContactList from 'components/ContactLIst';
 import Filter from 'components/Filter';
 import { Container, Title } from './App.styled';
 import { Box } from 'components/Box/Box';
+import { ContactsContext } from 'components/ContextProvider';
 
 const SAVE_CONTACTS_KEY = 'contacts';
 const initialContacts = [
@@ -46,7 +47,9 @@ const App = () => {
   const filterContacts = () => {
     if (contacts.length !== 0) {
       const normalizedFilter = filter.toLowerCase();
-      return contacts.filter(({ name }) => name.includes(normalizedFilter));
+      return contacts.filter(({ name }) =>
+        name.toLowerCase().includes(normalizedFilter)
+      );
     }
     return [];
   };
@@ -54,16 +57,20 @@ const App = () => {
   const filteredContacts = filterContacts();
 
   return (
-    <Box display="flex" justifyContent="center">
-      <Container>
-        <Title>Phonebook</Title>
-        <ContactForm addContact={addContact} />
+    <ContactsContext.Provider
+      value={{ contacts: filteredContacts, onDelete: deleteContact }}
+    >
+      <Box display="flex" justifyContent="center">
+        <Container>
+          <Title>Phonebook</Title>
+          <ContactForm addContact={addContact} />
 
-        <Title>Contacts</Title>
-        <Filter value={filter} onChange={handleFilterInput} />
-        <ContactList contacts={filteredContacts} onDelete={deleteContact} />
-      </Container>
-    </Box>
+          <Title>Contacts</Title>
+          <Filter value={filter} onChange={handleFilterInput} />
+          <ContactList />
+        </Container>
+      </Box>
+    </ContactsContext.Provider>
   );
 };
 
