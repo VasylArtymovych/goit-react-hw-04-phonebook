@@ -41,7 +41,7 @@ const ContactForm = ({ addContact }) => {
   };
 
   return (
-    <Form onSubmit={submitHandler}>
+    <Form onSubmit={submitHandler} autoComplete="off">
       <Label htmlFor={inputNameId}>Name</Label>
       <Input
         id={inputNameId}
